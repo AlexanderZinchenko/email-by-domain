@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Email hunter</title>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <link href="style.css" rel="stylesheet">
+        <script src="EmailHunterScripts.js"></script>
+    	<script type="text/javascript" src="jquery.touchSwipe.min.js"></script>
+    </head>
+
+    <body>
+    	<div class="container">
+	    	<div id="sidebar">
+	    		<ul id="nav">
+		    		<li><a>personal/generic</a>
+		    			<ul>
+		    				<li><a><input type="checkbox">personal</a></li>
+            				<li><a><input type="checkbox">general</a></li>
+            			</ul>
+		    		</li>
+		    		<li><a>filters</a>
+		    			<ul>
+		    				<li><a><input placeholder="library@gmail.com"></a></li>
+		    			</ul>
+		    		</li>
+		    		<li><a>looking for</a>
+						<ul>
+		    				<li><a><input placeholder="marketing@gmail.com"></a></li>
+		    			</ul>
+		    		</li>
+		    		<li><a>export/import</a>
+						<ul>
+		    				<li><a>export to google spreadsheets</a></li>
+            				<li><a>download .csv</a></li>
+            				<li><a>import .csv</a></li>
+            			</ul>
+		    		</li>
+		    		<li><a>personal api key</a>
+						<ul>
+		    				<li><a><input placeholder="your api key"></a></li>
+		    			</ul>
+		    		</li>
+		    		<li><a>instructions</a></li>
+	    		</ul>
+	    	</div>
+
+	    	<div class="main-content">
+	    		<div class="swipe-area"></div>
+		        <a href="#" data-toggle=".container" id="sidebar-toggle">
+		            <span class="bar"></span>
+		            <span class="bar"></span>
+		            <span class="bar"></span>
+		        </a>
+
+		        <div class="formTable">
+			        <div class="form">
+					    <form>
+							<textarea type="text" name="value" placeholder="Domains:"></textarea>
+							<button type="submit" class="submitButton">Submit</button>
+						</form>
+					</div>
+
+					<div id="tableDiv">
+						<table id="table"></table>
+					</div>
+				</div>
+		    </div>
+		</div>
+			
+		<script>
+    		window.onload = function(){
+			    var form = document.querySelector("form");
+			    form.addEventListener("submit", function(event) {
+				  	event.preventDefault();
+				  	domainNameMass = [];
+				  	document.getElementById("tableDiv").innerHTML = "";
+				  	var tableDiv = document.getElementById("tableDiv");
+				  	tableDiv.id = 'tableDiv';
+				  	var selectAllButton = document.createElement("button");
+				  	selectAllButton.id = 'selectAllButton';
+				  	var tableT = document.createElement("table");
+				  	tableDiv.appendChild(tableT);
+				  	tableT.id = 'table';
+				  	tableDiv.appendChild(selectAllButton);
+					selectAllButton.innerHTML = "Copy all from the table";
+				  	var inputDomain = form.elements.value.value.split("\n");
+				  	document.getElementById("table").innerHTML = " ";
+				  	for (var countInputDom in inputDomain){
+				  		domainNameMass.push(inputDomain[countInputDom]);
+				    }
+				    selectAllButton.addEventListener("click", function(){
+						alert("click");
+					});
+				    start();
+			  	});
+			}
+
+			$(document).ready(function ()
+			  { 
+			  $('#nav li').hover(
+			  function () {
+			    $('ul', this).slideDown(100);
+			  }, 
+			  function () {
+			    $('ul', this).slideUp(100);         
+			  }
+			  );    
+			});
+		</script>
+    </body>
+</html>
